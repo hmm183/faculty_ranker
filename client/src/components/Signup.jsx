@@ -1,8 +1,8 @@
-// src/pages/Signup.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/Signup.css'; // Assuming you have a CSS file for styling
-import { useAuth } from '../context/AuthContext'; // Assuming you have an AuthContext for managing auth state
+import '../styles/Signup.css';
+
+const API_URL = process.env.REACT_APP_API_URL;
 
 function Signup() {
   const [signupData, setSignupData] = useState({ name: '', email: '', phno: '', password: '' });
@@ -16,9 +16,14 @@ function Signup() {
     e.preventDefault();
     if (otpLoading) return;
 
+    if (!signupData.email.endsWith('@vitapstudent.ac.in')) {
+      alert('Only @vitapstudent.ac.in emails can sign up.');
+      return navigate('/403');
+    }
+
     setOtpLoading(true);
     try {
-      const res = await fetch('/request-otp', {
+      const res = await fetch(`${API_URL}/api/auth/request-otp`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(signupData)
@@ -47,9 +52,9 @@ function Signup() {
         <input type="text" name="phno" placeholder="Phone Number" value={signupData.phno} onChange={handleSignupChange} required />
         <input type="password" name="password" placeholder="Password" value={signupData.password} onChange={handleSignupChange} required />
         <button type="submit" disabled={otpLoading}>{otpLoading ? 'Sending OTP...' : 'Request OTP'}</button>
-        <a href="/auth/google" className="google-login-btn">
-        <img src="https://i.postimg.cc/3NGKBY4V/google-icon.png" alt="Google" />
-        Sign up with Google
+        <a href={`${API_URL}/api/auth/google`} className="google-login-btn">
+          <img src="https://i.postimg.cc/3NGKBY4V/google-icon.png" alt="Google" />
+          Sign up with Google
         </a>
         <p>Already have an account? <a href="/login">Login</a></p>
       </form>

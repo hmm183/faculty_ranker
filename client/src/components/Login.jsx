@@ -1,10 +1,10 @@
-// src/pages/Login.jsx
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import '../styles/Login.css'
 
-// Simple JWT payload parser—no external lib needed
+const API_URL = "https://faculty-ranker-iu1g.vercel.app";
+
 function parseJWT(token) {
   if (!token) throw new Error('Missing token')
   const parts = token.split('.')
@@ -32,7 +32,7 @@ export default function Login() {
   const handleSubmit = async e => {
     e.preventDefault()
     try {
-      const res = await fetch('/signin', {
+      const res = await fetch(`${API_URL}/api/auth/signin`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(loginData),
@@ -45,8 +45,10 @@ export default function Login() {
         return
       }
 
-      // Save token in localStorage
-      localStorage.setItem('token', data.token)
+      if (!data.token) {
+        alert('Invalid login response')
+        return
+      }
 
       let payload
       try {
@@ -57,6 +59,11 @@ export default function Login() {
         return
       }
 
+      if (!payload.email.endsWith('@vitapstudent.ac.in')) {
+        alert('Only @vitapstudent.ac.in emails are allowed.')
+        return navigate('/403')
+      }
+
       const user = {
         id: payload.id,
         email: payload.email,
@@ -64,10 +71,8 @@ export default function Login() {
         banned: payload.banned,
       }
 
-      // Set auth context
+      localStorage.setItem('token', data.token)
       login(data.token, user)
-
-      // Redirect based on role
       navigate(user.role === 'admin' ? '/admin' : '/facultyList')
     } catch (err) {
       console.error('Login error:', err)
@@ -97,11 +102,8 @@ export default function Login() {
         />
         <button type="submit">Login</button>
 
-        <a href="/auth/google" className="google-login-btn">
-          <img
-            src="https://i.postimg.cc/3NGKBY4V/google-icon.png"
-            alt="Google"
-          />
+        <a href={`${API_URL}/api/auth/google`} className="google-login-btn">
+          <img src="https://i.postimg.cc/3NGKBY4V/google-icon.png" alt="Google" />
           Login with Google
         </a>
 

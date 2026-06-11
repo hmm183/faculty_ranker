@@ -1,57 +1,54 @@
+// config/passport.js
 require('dotenv').config();
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('../models/User');
 
-// List of admin emails (assign 'admin' role if matched)
-const adminEmails = ['admin@example.com', 'manager@yourdomain.com'];
-console.log('Google ID:', process.env.GOOGLE_CLIENT_ID);
-console.log('Google Secret:', process.env.GOOGLE_CLIENT_SECRET);
+// Emails that should get the 'admin' role
+const adminEmails = [
+  'admin@example.com',
+  'manager@yourdomain.com'
+];
 
-passport.use(new GoogleStrategy({
-    clientID: process.env.GOOGLE_CLIENT_ID,          
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: '/auth/google/callback'
-  },
-  async (accessToken, refreshToken, profile, done) => {
-    try {
-      if (!profile.emails || !profile.emails.length) {
-        return done(new Error('No email found in Google profile'), null);
-      }
-      const email = profile.emails[0].value;
-      const role = adminEmails.includes(email) ? 'admin' : 'user';
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: `${process.env.BACKEND_URL}/api/auth/google/callback`
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        // Ensure we have an email
+        if (!profile.emails || profile.emails.length === 0) {
+          return done(new Error('No email found in Google profile'));
+        }
 
-      let user = await User.findOne({ email });
-      if (user) {
-        // Existing user
+        const email = profile.emails[0].value;
+        const role = adminEmails.includes(email) ? 'admin' : 'user';
+
+        // Find existing user or create a new one
+        let user = await User.findOne({ email });
+        if (!user) {
+          user = await User.create({
+            username: profile.displayName,
+            email: email,
+            phno: '',
+            password: '',
+            provider: 'google',
+            role: role,
+            verified: true
+          });
+        }
+
         return done(null, user);
+      } catch (err) {
+        return done(err);
       }
-      // Create new user (OAuth users are marked verified)
-      user = await User.create({
-        username: profile.displayName,
-        email: email,
-        phno: '',
-        provider: 'google',
-        role: role,
-        verified: true
-      });
-      return done(null, user);
-    } catch (err) {
-      return done(err, null);
     }
-  }
-));
+  )
+);
 
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
-passport.deserializeUser(async (id, done) => {
-  try {
-    const user = await User.findById(id);
-    done(null, user);
-  } catch (err) {
-    done(err, null);
-  }
-});
+// We are stateless—no serializeUser/deserializeUser calls here
 
 module.exports = passport;

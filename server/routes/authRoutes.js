@@ -1,3 +1,4 @@
+// routes/authRoutes.js
 const router   = require('express').Router();
 const passport = require('passport');
 const authCtrl = require('../controllers/authController');
@@ -7,19 +8,26 @@ const { jwtAuth } = require('../middleware/jwtAuth');
 router.post('/request-otp', authCtrl.requestOTP);
 
 // Verify OTP and create account
-router.post('/verify-otp',  authCtrl.verifyOTP);
+router.post('/verify-otp', authCtrl.verifyOTP);
 
 // Local signin
-router.post('/signin',      authCtrl.signIn);
+router.post('/signin', authCtrl.signIn);
 
-// Google OAuth routes
+// Google OAuth (stateless, JWT-based)
 router.get(
-  '/auth/google',
-  passport.authenticate('google', { scope: ['profile', 'email'] })
+  '/google',
+  passport.authenticate('google', {
+    scope:   ['profile','email'],
+    session: false
+  })
 );
+
 router.get(
-  '/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: '/' }),
+  '/google/callback',
+  passport.authenticate('google', {
+    failureRedirect: '/',
+    session:        false
+  }),
   authCtrl.googleCallback
 );
 
