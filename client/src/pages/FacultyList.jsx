@@ -99,6 +99,14 @@ const FacultyList = () => {
     <div>
       <Navbar />
       <div className="faculty-list-container">
+        <div className="faculty-list-header" style={{ textAlign: 'center', marginBottom: '2.5rem', color: '#fff' }}>
+          <h1 style={{ fontSize: '2.5rem', fontWeight: '800', marginBottom: '0.5rem', background: 'linear-gradient(to right, #a78bfa, #818cf8)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+            VIT-AP Faculty Ranker
+          </h1>
+          <p style={{ fontSize: '1.1rem', color: '#9ca3af', maxWidth: '600px', margin: '0 auto', lineHeight: '1.5' }}>
+            Search, rate, and discover the best professors at VIT-AP University. Read reviews, check ratings, and share feedback on VIT AP faculty members.
+          </p>
+        </div>
         <div className="search-add-container" ref={searchContainerRef}>
           <div className="search-box">
             <input
