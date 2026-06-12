@@ -45,6 +45,11 @@ function Signup() {
 
   return (
     <div className="auth-container">
+      <title>Sign Up - VIT-AP Faculty Ranker</title>
+      <meta name="description" content="Create a new VIT-AP Faculty Ranker account to start search rating and writing reviews for your VIT AP professors." />
+      <meta name="keywords" content="VIT AP Faculty Ranker Signup, Register Faculty Ranker" />
+      <link rel="canonical" href="https://vitap-faculty-ranker.vercel.app/signup" />
+
       <form onSubmit={handleSignup} className="auth-form">
         <h2>Sign Up</h2>
         <input type="text" name="name" placeholder="Name" value={signupData.name} onChange={handleSignupChange} required />

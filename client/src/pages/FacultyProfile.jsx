@@ -88,6 +88,8 @@ export default function FacultyProfile() {
   if (error) {
     return (
       <div className="pt-20 text-center text-red-400">
+        <title>Error - Faculty Ranker</title>
+        <meta name="description" content="An error occurred while loading this faculty profile on VIT-AP Faculty Ranker." />
         {error}
         <br />
         <button
@@ -103,6 +105,8 @@ export default function FacultyProfile() {
   if (faculty === null || hasRated === null) {
     return (
       <div className="pt-20 flex justify-center text-white text-xl">
+        <title>Loading Faculty Profile - Faculty Ranker</title>
+        <meta name="description" content="Loading reviews, ratings, and student feedback for VIT-AP faculty." />
         Loading…
       </div>
     );
@@ -122,6 +126,11 @@ export default function FacultyProfile() {
 
   return (
     <div className="pt-14 pb-10 min-h-screen bg-gray-900 text-white">
+      <title>{`${name} - VIT-AP Faculty Rating & Reviews | Faculty Ranker`}</title>
+      <meta name="description" content={`Read reviews and ratings for Prof. ${name} in the ${department || 'VIT-AP'} department. Teaching: ${teaching_rating.toFixed(2)} ⭐, Correction: ${correction_rating.toFixed(2)} ⭐, Attendance: ${attendance_rating.toFixed(2)} ⭐.`} />
+      <meta name="keywords" content={`VIT AP, ${name}, ${name} reviews, ${name} rating, ${department || 'VIT AP'} faculty`} />
+      <link rel="canonical" href={`https://vitap-faculty-ranker.vercel.app/faculty/${facultyId}`} />
+
       <ProfileNavbar />
       <div className="max-w-3xl mx-auto bg-gray-800 rounded-lg shadow-xl p-6 mt-6">
         <div className="flex items-center space-x-6 mb-6">

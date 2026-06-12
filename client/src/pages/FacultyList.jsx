@@ -97,6 +97,11 @@ const FacultyList = () => {
 
   return (
     <div>
+      <title>VIT-AP Faculty Ranker - Find & Rate Best VIT AP Professors</title>
+      <meta name="description" content="Search, rate, and discover the best professors at VIT-AP University. Read, share, and compare reviews, ratings, and feedback on VIT AP faculty members." />
+      <meta name="keywords" content="VIT AP, VIT AP Faculty, VIT-AP Professors, Faculty Ranker, VIT AP Reviews, VIT AP Ratings, VIT AP Faculty Ranker, VIT University" />
+      <link rel="canonical" href="https://vitap-faculty-ranker.vercel.app/facultyList" />
+
       <Navbar />
       <div className="faculty-list-container">
         <div className="faculty-list-header" style={{ textAlign: 'center', marginBottom: '2.5rem', color: '#fff' }}>

@@ -82,6 +82,11 @@ export default function Login() {
 
   return (
     <div className="auth-container">
+      <title>Login - VIT-AP Faculty Ranker</title>
+      <meta name="description" content="Log in to your VIT-AP Faculty Ranker account to submit ratings, write reviews, and share feedback for VIT-AP professors." />
+      <meta name="keywords" content="VIT AP Faculty Ranker Login, Faculty Ranker Signin" />
+      <link rel="canonical" href="https://vitap-faculty-ranker.vercel.app/login" />
+
       <form onSubmit={handleSubmit} className="auth-form">
         <h2>Login</h2>
         <input

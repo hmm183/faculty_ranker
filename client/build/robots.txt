@@ -1,3 +1,9 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+Disallow: /admin
+Disallow: /users
+Disallow: /faculty-management
+Disallow: /add-faculty
+Disallow: /verify
+
+Sitemap: https://vitap-faculty-ranker.vercel.app/sitemap.xml

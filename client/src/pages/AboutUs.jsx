@@ -72,6 +72,11 @@ const AboutUs = () => {
 
   return (
     <>
+      <title>About Us - VIT-AP Faculty Ranker</title>
+      <meta name="description" content="Meet the team of digital craftsmen behind VIT-AP Faculty Ranker. Learn about our roles, contributions, and mission to help students find and rate the best professors." />
+      <meta name="keywords" content="VIT AP Faculty Ranker Team, Faculty Ranker About, VIT AP Developers, VIT AP Professors Reviews" />
+      <link rel="canonical" href="https://vitap-faculty-ranker.vercel.app/about" />
+
       {/* Inline Navbar */}
       <div className="fixed w-full z-50 bg-slate-900/70 backdrop-blur border-b border-white/10 px-4 py-3 flex justify-between items-center">
         <div className="flex items-center space-x-4">
