@@ -7,10 +7,18 @@ export default function ProfileNavbar() {
   const navigate = useNavigate();
   const { logout } = useAuth();
 
+  const handleBack = () => {
+    if (window.history.state && window.history.state.idx > 0) {
+      navigate(-1);
+    } else {
+      navigate('/');
+    }
+  };
+
   return (
     <nav className="fixed top-0 left-0 w-full bg-gray-800 text-white flex items-center justify-between px-6 h-14 z-50 shadow-lg">
       <button
-        onClick={() => navigate(-1)}
+        onClick={handleBack}
         className="text-lg font-semibold hover:text-gray-300"
       >
         ← Back

@@ -11,11 +11,11 @@ const AboutUs = () => {
   const teamMembers = [
     {
       id: 1,
-      name: "Hmm183",
+      name: "183",
       role: "DBA and Lead Engineer",
       contribution: "Designed and maintained the database infrastructure. Implemented data security protocols and optimized query performance for scalability.implemented authentication with login and jwtAuth. Created APIs to manage Images and Faculty verifcation for the Admin Panel",
       image: "https://i.postimg.cc/26zdxxVH/Vrishank-about-us.jpg",
-      github: "https://github.com/hmm183",
+      github: "https://github.com",
       icon: Database,
       gradient: "from-amber-400 via-orange-500 to-red-500",
       specialty: "Backend APIs & Security"

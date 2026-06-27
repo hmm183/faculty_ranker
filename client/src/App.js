@@ -15,7 +15,8 @@ import AddFacultyNavbar from './components/AddFacultyNavbar';
 import AdminNavbar from './components/AdminNavbar';
 import FacultyProfile from './pages/FacultyProfile';
 import AboutUs from './pages/AboutUs';
-
+import Footer from './components/Footer';
+import Directory from './pages/Directory';
 
 // Protected-route wrapper component
 const ProtectedRoute = ({ children, requiresAdmin = false }) => {
@@ -27,6 +28,18 @@ const ProtectedRoute = ({ children, requiresAdmin = false }) => {
   if (requiresAdmin && !isAdmin) return <Navigate to="/facultyList" replace />;
 
   return children;
+};
+
+// Public layout wrapper to include the global footer
+const PublicLayout = ({ children }) => {
+  return (
+    <div className="flex flex-col min-h-screen">
+      <div className="flex-grow">
+        {children}
+      </div>
+      <Footer />
+    </div>
+  );
 };
 
 function App() {
@@ -52,10 +65,11 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/verify" element={<Verify />} />
-      <Route path="/facultyList" element={<FacultyList />} />
+      <Route path="/facultyList" element={<PublicLayout><FacultyList /></PublicLayout>} />
       <Route path="/403" element={<NotAllowed />} />
-      <Route path="/faculty/:id" element={<FacultyProfile />} />
-      <Route path="/about" element={<AboutUs />} />
+      <Route path="/faculty/:id" element={<PublicLayout><FacultyProfile /></PublicLayout>} />
+      <Route path="/about" element={<PublicLayout><AboutUs /></PublicLayout>} />
+      <Route path="/directory" element={<PublicLayout><Directory /></PublicLayout>} />
 
       {/* Add Faculty with Navbar */}
       <Route

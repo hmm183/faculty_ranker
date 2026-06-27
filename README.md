@@ -37,7 +37,7 @@ Our platform was designed and developed by a dedicated team of digital craftsmen
 
 | Contributor | Role | Key Contributions | GitHub |
 | :--- | :--- | :--- | :--- |
-| **Hmm183** | DBA & Lead Engineer | Designed & optimized database infrastructure; implemented security protocols, login, and jwtAuth; created image management and faculty verification APIs. | [@hmm183](https://github.com/hmm183) |
+| **183** | DBA & Lead Engineer | Designed & optimized database infrastructure; implemented security protocols, login, and jwtAuth; created image management and faculty verification APIs. | [@183](https://github.com) |
 | **BumbleBee** | Data Visualization Specialist | Developed responsive search bar, regex-based faculty GET APIs, and core page layouts (including the About Us page). | [@Vishwa5395](https://github.com/Vishwa5395) |
 | **Odd Problem** | Backend Developer | Created the rate-limited POST API for adding faculty; implemented schemas to log user actions and added faculty. | [@oddproblem](https://github.com/oddproblem) |
 | **RS** | Frontend Developer | Built the responsive home interface, paginated results viewing component, and integrated styling systems. | [@RaushanShrivastwa](https://github.com/RaushanShrivastwa) |
